@@ -1,21 +1,103 @@
 {
   "employeeList": [
     {
-      "id": "1dbf",
+      "id": "d01b",
+      "name": "Aditya",
+      "profileImage": "../assets/boy1.jpeg",
+      "gender": "male",
+      "department": [
+        "HR",
+        "Sales",
+        "Engineer"
+      ],
+      "salary": "10000",
+      "startDate": {
+        "day": "14",
+        "month": "9",
+        "year": "2021"
+      },
+      "notes": "",
+      "errors": {}
+    },
+    {
+      "name": "Rakshit edited",
+      "profileImage": "../assets/boy1.jpeg",
+      "gender": "male",
+      "department": [
+        "Sales",
+        "Finance",
+        "Engineer",
+        "HR"
+      ],
+      "salary": "10000",
+      "startDate": {
+        "day": "15",
+        "month": "10",
+        "year": "2023"
+      },
+      "notes": "",
+      "errors": {},
+      "empId": "1766",
+      "id": "1766"
+    },
+    {
+      "id": "2bc7",
       "name": "Rakshit Chauhan",
+      "profileImage": "../assets/boy1.jpeg",
+      "gender": "male",
+      "department": [
+        "Sales",
+        "Finance",
+        "Engineer"
+      ],
+      "salary": "10000",
+      "startDate": {
+        "day": "15",
+        "month": "10",
+        "year": "2023"
+      },
+      "notes": "",
+      "errors": {}
+    },
+    {
+      "id": "7c91",
+      "name": "Rakshit edited",
+      "profileImage": "../assets/boy1.jpeg",
+      "gender": "male",
+      "department": [
+        "Sales",
+        "Finance",
+        "Engineer",
+        "HR"
+      ],
+      "salary": "10000",
+      "startDate": {
+        "day": "15",
+        "month": "10",
+        "year": "2023"
+      },
+      "notes": "",
+      "errors": {},
+      "empId": "1766"
+    },
+    {
+      "name": "Rakshit ",
       "profileImage": "../assets/boy2.jpeg",
       "gender": "male",
       "department": [
+        "HR",
         "Sales"
       ],
       "salary": "10000",
       "startDate": {
-        "day": "16",
-        "month": "10",
-        "year": "2022"
+        "day": "15",
+        "month": "11",
+        "year": "2021"
       },
-      "notes": "afdafasdfa",
-      "errors": {}
+      "notes": "",
+      "errors": {},
+      "empId": "223d",
+      "id": "223d"
     }
   ]
 }

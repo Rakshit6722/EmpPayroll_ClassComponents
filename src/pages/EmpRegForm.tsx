@@ -4,8 +4,10 @@ import boy2 from '../assets/boy2.jpeg';
 import girl1 from '../assets/girl1.jpeg';
 import girl2 from '../assets/girl2.jpeg';
 import Header from '../components/Header';
-import { addEmployee } from '../services/Api';
+import { addEmployee, editEmployee, getIndividualEmployee } from '../services/Api';
 import { toast } from 'react-toastify';
+import { NavigateFunction } from 'react-router-dom';
+import { withRouter } from '../utils/withRouter';
 
 const profileImages = [
     { src: boy1, value: "../assets/boy1.jpeg" },
@@ -34,10 +36,15 @@ interface EmpRegFormState {
         salary?: string;
         startDate?: string;
     };
+    empId: string
 }
 
-export class EmpRegForm extends Component<{}, EmpRegFormState> {
-    constructor(props: {}) {
+interface EmpRegFromProps {
+    navigate: NavigateFunction
+}
+
+export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
+    constructor(props: EmpRegFromProps) {
         super(props);
         this.state = {
             name: '',
@@ -47,7 +54,8 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
             salary: '',
             startDate: { day: '', month: '', year: '' },
             notes: '',
-            errors: {}
+            errors: {},
+            empId: localStorage.getItem('empId') || ''
         };
     }
 
@@ -90,6 +98,32 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
         }
     }
 
+    componentDidMount(): void {
+        if (this.state.empId) {
+            this.getEmployee(this.state.empId)
+        }
+    }
+
+    getEmployee = async (empId: string) => {
+        try {
+            const response = await getIndividualEmployee(empId)
+            if (response.status === 200) {
+                this.setState({
+                    name: response.data.name || '',
+                    profileImage: response.data.profileImage || '',
+                    gender: response.data.gender || '',
+                    department: response.data.department || [],
+                    salary: response.data.salary || '',
+                    startDate: response.data.startDate || { day: '', month: '', year: '' },
+                    notes: response.data.notes || '',
+                });
+            }
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     validateForm = () => {
         const errors: EmpRegFormState['errors'] = {};
         const { name, profileImage, gender, department, salary, startDate } = this.state;
@@ -117,9 +151,19 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
 
         try {
             const response = await addEmployee(this.state)
-            if(response){
+            if (response) {
+                this.props.navigate("/")
                 toast.success('Employee added successfully');
-                
+                this.setState({
+                    name: '',
+                    profileImage: '',
+                    gender: '',
+                    department: [],
+                    salary: '',
+                    startDate: { day: '', month: '', year: '' },
+                    notes: '',
+                    errors: {}
+                })
             }
         } catch (err) {
             console.log(err);
@@ -138,6 +182,19 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
             notes: '',
             errors: {}
         })
+    }
+
+    handleUpdate = async () => {
+        try {
+            const response = await editEmployee(this.state.empId, this.state)
+            if (response.status === 200) {
+                toast.success('Employee updated successfully')
+                localStorage.removeItem('empId')
+                this.props.navigate('/')
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     render() {
@@ -197,7 +254,7 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                 </div>
 
                                 <div className="flex items-start gap-4">
-                                    <label  className="w-1/4 min-w-24 font-medium">Gender</label>
+                                    <label className="w-1/4 min-w-24 font-medium">Gender</label>
                                     <div className="flex flex-col sm:flex-row sm:gap-6 gap-3 w-3/4">
                                         <label htmlFor='male' className="flex items-center gap-4">
                                             <input
@@ -344,13 +401,29 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                     Cancel
                                 </button>
                                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-2/4 justify-end">
-                                    <button
-                                        type="submit"
-                                        id="submit-button"
-                                        className="w-full sm:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#82A70C] hover:text-white mb-4 sm:mb-0"
-                                    >
-                                        Submit
-                                    </button>
+                                    {
+                                        this.state.empId ? (<>
+                                            <button
+                                                onClick={
+                                                    this.handleUpdate
+                                                }
+                                                type="button"
+                                                className="w-full sm:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#82A70C] hover:text-white mb-4 sm:mb-0"
+                                            >
+                                                Update
+                                            </button>
+                                        </>) : (<>
+                                            <button
+                                                type="submit"
+                                                id="submit-button"
+                                                className="w-full sm:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#82A70C] hover:text-white mb-4 sm:mb-0"
+                                            >
+                                                Submit
+                                            </button>
+
+                                        </>)
+                                    }
+
                                     <button
                                         onClick={this.handleReset}
                                         type="reset"
@@ -368,4 +441,4 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
     }
 }
 
-export default EmpRegForm;
+export default withRouter(EmpRegForm);

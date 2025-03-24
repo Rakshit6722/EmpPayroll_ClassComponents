@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import { getEmployees } from '../services/Api';
+import { deleteEmployee, getEmployees } from '../services/Api';
 import addButton from '../assets/add.png'
 import deleteIcon from '../assets/delete.png'
 import editIcon from '../assets/pen.png'
 import searchIcon from '../assets/search_icon.png'
+import { NavigateFunction, NavLink } from 'react-router-dom';
+import { withRouter } from '../utils/withRouter';
 
 interface EmpTableState {
     employees: Array<{
@@ -22,8 +24,12 @@ interface EmpTableState {
     }>;
 }
 
-class EmpTable extends Component<{}, EmpTableState> {
-    constructor(props: {}) {
+interface EmpTableProps{
+    navigate: NavigateFunction
+}
+
+class EmpTable extends Component<EmpTableProps, EmpTableState> {
+    constructor(props: EmpTableProps) {
         super(props);
         this.state = {
             employees: []
@@ -45,11 +51,20 @@ class EmpTable extends Component<{}, EmpTableState> {
     };
 
     handleEdit = (id: string) => {
-        // Edit functionality to be implemented
+        localStorage.setItem('empId', id);
+        this.props.navigate('/empRegister');
     }
 
-    handleDelete = (id: string) => {
-        // Delete functionality to be implemented
+    handleDelete = async (id: string) => {
+       try{
+        console.log(id)
+        const response = await deleteEmployee(String(id));
+        if(response.status === 200){
+            this.fetchData();
+        }
+       }catch(err){
+            console.log(err);
+       }
     }
 
     searchByName = () => {
@@ -68,13 +83,13 @@ class EmpTable extends Component<{}, EmpTableState> {
                 <Header />
                 <div className="flex flex-col items-center w-full min-h-screen bg-gray-100">
                     <main className="flex flex-col items-center w-full p-8 space-y-8">
-                    
+
                         <div className="flex justify-between w-4/5">
                             <div>
                                 <h2 className="text-2xl font-bold text-gray-700">Employee Details</h2>
                             </div>
                             <div className="flex items-center space-x-4">
-    
+
                                 <div className="flex items-center justify-between bg-white px-4 py-2 rounded-lg">
                                     <input
                                         type="text"
@@ -87,17 +102,17 @@ class EmpTable extends Component<{}, EmpTableState> {
                                     </div>
                                 </div>
 
-            
+
                                 <div className="flex items-center space-x-2 bg-[#82A70C] text-white py-2 px-4 rounded">
-                                    <img src={addButton} alt="add" className="w-4 h-4" />
-                                    <a href="empForm.html" className="text-white">
+                                    <NavLink to={"/empRegister"} className="flex items-center space-x-2 no-underline">
+                                        <img src={addButton} alt="add" className="w-4 h-4" />
                                         <p>Add User</p>
-                                    </a>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Table Section */}
+
                         <div className="w-4/5">
                             <table className="w-full border-collapse">
                                 <thead className="bg-gray-700 text-white rounded-t">
@@ -186,4 +201,4 @@ class EmpTable extends Component<{}, EmpTableState> {
     }
 }
 
-export default EmpTable;
+export default withRouter(EmpTable);
