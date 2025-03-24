@@ -1,0 +1,21 @@
+{
+  "employeeList": [
+    {
+      "id": "1dbf",
+      "name": "Rakshit Chauhan",
+      "profileImage": "../assets/boy2.jpeg",
+      "gender": "male",
+      "department": [
+        "Sales"
+      ],
+      "salary": "10000",
+      "startDate": {
+        "day": "16",
+        "month": "10",
+        "year": "2022"
+      },
+      "notes": "afdafasdfa",
+      "errors": {}
+    }
+  ]
+}
