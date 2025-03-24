@@ -5,6 +5,7 @@ import girl1 from '../assets/girl1.jpeg';
 import girl2 from '../assets/girl2.jpeg';
 import Header from '../components/Header';
 import { addEmployee } from '../services/Api';
+import { toast } from 'react-toastify';
 
 const profileImages = [
     { src: boy1, value: "../assets/boy1.jpeg" },
@@ -116,6 +117,10 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
 
         try {
             const response = await addEmployee(this.state)
+            if(response){
+                toast.success('Employee added successfully');
+                
+            }
         } catch (err) {
             console.log(err);
         }
