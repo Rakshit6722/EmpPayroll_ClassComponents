@@ -22,6 +22,7 @@ interface EmpTableState {
         }
         profileImage: string;
     }>;
+    searchQuery: string;
 }
 
 interface EmpTableProps{
@@ -32,7 +33,8 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
     constructor(props: EmpTableProps) {
         super(props);
         this.state = {
-            employees: []
+            employees: [],
+            searchQuery: ''
         };
     }
 
@@ -67,10 +69,14 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
        }
     }
 
-    searchByName = () => {
-        // Search functionality to be implemented
+    handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ searchQuery: event.target.value });
     }
 
+    getFilteredEmployees = () => {
+        const { employees, searchQuery } = this.state;
+        return employees.filter(emp => emp.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    }
 
     formatDate = (dateObj: { day: string; month: string; year: string }) => {
         if (!dateObj) return "";
@@ -78,6 +84,7 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
     }
 
     render() {
+        const filteredEmployees = this.getFilteredEmployees();
         return (
             <>
                 <Header />
@@ -89,20 +96,19 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                 <h2 className="text-2xl font-bold text-gray-700">Employee Details</h2>
                             </div>
                             <div className="flex items-center space-x-4">
-
                                 <div className="flex items-center justify-between bg-white px-4 py-2 rounded-lg">
                                     <input
                                         type="text"
                                         id="emp-main-search_box"
                                         className="w-full outline-none border-none bg-transparent"
                                         placeholder="Search..."
+                                        value={this.state.searchQuery}
+                                        onChange={this.handleSearch}
                                     />
-                                    <div className="flex items-center justify-center cursor-pointer" onClick={this.searchByName}>
+                                    <div className="flex items-center justify-center cursor-pointer">
                                         <img src={searchIcon} alt="search" className="w-5 h-5" />
                                     </div>
                                 </div>
-
-
                                 <div className="flex items-center space-x-2 bg-[#82A70C] text-white py-2 px-4 rounded">
                                     <NavLink to={"/empRegister"} className="flex items-center space-x-2 no-underline">
                                         <img src={addButton} alt="add" className="w-4 h-4" />
@@ -111,8 +117,6 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                 </div>
                             </div>
                         </div>
-
-
                         <div className="w-4/5">
                             <table className="w-full border-collapse">
                                 <thead className="bg-gray-700 text-white rounded-t">
@@ -126,8 +130,8 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                     </tr>
                                 </thead>
                                 <tbody className="border-2 border-gray-200">
-                                    {this.state.employees.length > 0 ? (
-                                        this.state.employees.map((employee) => (
+                                    {filteredEmployees.length > 0 ? (
+                                        filteredEmployees.map((employee) => (
                                             <tr key={employee.id} className="border-b border-gray-200">
                                                 <td className="p-4 bg-white">
                                                     <div className="flex items-center space-x-4">
@@ -168,27 +172,8 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                             </tr>
                                         ))
                                     ) : (
-                                        <tr className="border-b border-gray-200">
-                                            <td className="p-4 bg-white">
-                                                <div className="flex items-center space-x-4">
-                                                    <img
-                                                        src="../assets/boy1.jpeg"
-                                                        alt="John Doe"
-                                                        className="w-8 h-8 rounded-full"
-                                                    />
-                                                    <span>John Doe</span>
-                                                </div>
-                                            </td>
-                                            <td className="p-4 text-center bg-white">Male</td>
-                                            <td className="p-4 text-center bg-white">Sales HR Finance</td>
-                                            <td className="p-4 text-center bg-white">Rs.10,000</td>
-                                            <td className="p-4 text-center bg-white">29 October 2025</td>
-                                            <td className="p-4 text-center bg-white">
-                                                <div className="flex justify-center space-x-2">
-                                                    <img src={deleteIcon} alt="delete" className="w-5 h-5 cursor-pointer" />
-                                                    <img src={editIcon} alt="edit" className="w-5 h-5 cursor-pointer" />
-                                                </div>
-                                            </td>
+                                        <tr>
+                                            <td colSpan={6} className="p-4 text-center bg-white">No employees found</td>
                                         </tr>
                                     )}
                                 </tbody>

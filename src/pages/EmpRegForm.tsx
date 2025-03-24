@@ -395,6 +395,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
 
                             <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
                                 <button
+                                    onClick={() => this.props.navigate('/')}
                                     type="button"
                                     className="w-full sm:w-1/4 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#707070] hover:text-white mb-4 sm:mb-0"
                                 >
