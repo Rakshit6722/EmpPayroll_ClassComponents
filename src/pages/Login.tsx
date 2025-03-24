@@ -18,11 +18,11 @@ const Login: React.FC = () => {
         try {
             const decoded = jwtDecode(credentialResponse.credential) as UserInfo;
 
-            // Store user info and credential in localStorage
+      
             localStorage.setItem('userInfo', JSON.stringify(decoded));
             localStorage.setItem('credential', credentialResponse.credential);
 
-            // Navigate to employee table
+
             navigate('/empTable');
         } catch (error) {
             console.error('Error decoding credential', error);
@@ -36,8 +36,8 @@ const Login: React.FC = () => {
 
     return (
         <>
-            <Header />
-            <div className="flex flex-col items-center justify-center min-h-screen bg-[#F7F7F7]">
+            <Header container={"login"} />
+            <div className="flex flex-col items-center justify-center min-h-[80vh] bg-[#F7F7F7]">
                 <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
                     <div className="flex flex-col items-center">
                         <h2 className="text-2xl font-bold text-[#42515F] mb-6 text-center">
