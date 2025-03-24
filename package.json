@@ -11,8 +11,12 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.12.1",
+    "@types/jwt-decode": "^2.2.1",
     "axios": "^1.8.4",
+    "google-auth-library": "^9.15.1",
     "json-server": "^1.0.0-beta.3",
+    "jwt-decode": "^4.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.0",
