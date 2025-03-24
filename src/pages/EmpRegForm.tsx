@@ -143,16 +143,18 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                 <Header />
                 <div>
                     <div className="w-full bg-[#F7F7F7] p-8 overflow-y-auto">
-                        <form onSubmit={this.handleSubmit} className="w-full max-w-4xl mx-auto bg-white py-6 px-16 flex flex-col gap-8 text-left text-lg text-[#42515F]">
+                        <form data-testid="form" onSubmit={this.handleSubmit} className="w-full max-w-4xl mx-auto bg-white py-6 px-16 flex flex-col gap-8 text-left text-lg text-[#42515F]">
                             <h2 className="text-left text-2xl font-bold text-[#42515F] capitalize">Employee Payroll Form</h2>
 
                             <div className="flex flex-col gap-5">
                                 <div className="flex items-center gap-4">
-                                    <label className="w-1/4 min-w-24">Name</label>
+                                    <label htmlFor='name' className="w-1/4 min-w-24">Name</label>
                                     <div className="w-3/4 relative">
                                         <input
+                                            data-testid="input-fields"
                                             type="text"
                                             name="name"
+                                            id='name'
                                             required
                                             className={`w-full h-10 p-2 border rounded ${errors.name ? 'border-red-500' : 'border-[#BDBDBD]'}`}
                                             value={this.state.name}
@@ -172,6 +174,7 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                         {profileImages.map((imgSrc, index) => (
                                             <label key={index} className="flex gap-3 items-center">
                                                 <input
+                                                    data-testid="input-fields"
                                                     type="radio"
                                                     name="profileImage"
                                                     value={imgSrc.value}
@@ -189,23 +192,27 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                 </div>
 
                                 <div className="flex items-start gap-4">
-                                    <label className="w-1/4 min-w-24 font-medium">Gender</label>
+                                    <label  className="w-1/4 min-w-24 font-medium">Gender</label>
                                     <div className="flex flex-col sm:flex-row sm:gap-6 gap-3 w-3/4">
-                                        <label className="flex items-center gap-4">
+                                        <label htmlFor='male' className="flex items-center gap-4">
                                             <input
+                                                data-testid="input-fields"
                                                 type="radio"
                                                 name="gender"
                                                 value="male"
+                                                id="male"
                                                 checked={this.state.gender === "male"}
                                                 onChange={this.handleChange}
                                                 className="w-5 h-5"
                                             />
                                             Male
                                         </label>
-                                        <label className="flex items-center gap-4">
+                                        <label htmlFor='female' className="flex items-center gap-4">
                                             <input
+                                                data-testid="input-fields"
                                                 type="radio"
                                                 name="gender"
+                                                id='female'
                                                 value="female"
                                                 className="w-5 h-5"
                                                 checked={this.state.gender === "female"}
@@ -225,6 +232,7 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                         {['HR', 'Sales', 'Finance', 'Engineer', 'Other'].map(dep => (
                                             <label key={dep} className="flex items-center gap-4">
                                                 <input
+                                                    data-testid="input-fields"
                                                     type="checkbox"
                                                     name="department"
                                                     value={dep}
@@ -245,6 +253,7 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                     <label className="w-1/4 min-w-24 font-medium">Salary</label>
                                     <div className="w-3/4 relative">
                                         <select
+                                            data-testid="input-fields"
                                             name="salary"
                                             required
                                             value={this.state.salary}
@@ -269,6 +278,7 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                     <div className="flex flex-col w-3/4 gap-3">
                                         <div className="flex flex-col sm:flex-row sm:gap-4 gap-3">
                                             <select
+                                                data-testid="input-fields"
                                                 name="startDate.day"
                                                 required
                                                 value={this.state.startDate.day}
@@ -279,6 +289,7 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                                 {[...Array(31)].map((_, i) => <option key={i} value={i + 1}>{i + 1}</option>)}
                                             </select>
                                             <select
+                                                data-testid="input-fields"
                                                 name="startDate.month"
                                                 required
                                                 value={this.state.startDate.month}
@@ -291,6 +302,7 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                                 ))}
                                             </select>
                                             <select
+                                                data-testid="input-fields"
                                                 name="startDate.year"
                                                 required
                                                 value={this.state.startDate.year}
@@ -310,6 +322,7 @@ export class EmpRegForm extends Component<{}, EmpRegFormState> {
                                 <div className="flex items-start gap-4">
                                     <label className="w-1/4 min-w-24 font-medium">Notes</label>
                                     <textarea
+                                        data-testid="input-fields"
                                         name="notes"
                                         className="w-3/4 h-20 p-2 border border-[#BDBDBD] rounded"
                                         value={this.state.notes}
