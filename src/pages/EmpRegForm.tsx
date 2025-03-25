@@ -315,7 +315,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                     <label className="w-1/4 min-w-24 font-medium">Salary</label>
                                     <div className="w-3/4 relative">
                                         <select
-                                            data-testid="input-fields"
+                                            data-testid="salary-dropdown-fields"
                                             name="salary"
                                             required
                                             value={this.state.salary}
