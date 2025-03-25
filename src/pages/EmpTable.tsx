@@ -89,14 +89,13 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
             <>
                 <Header />
                 <div className="flex flex-col items-center w-full min-h-screen bg-gray-100">
-                    <main className="flex flex-col items-center w-full p-8 space-y-8">
-
-                        <div className="flex justify-between w-4/5">
-                            <div>
+                    <main className="flex flex-col items-center w-full px-4 sm:px-8 py-8 space-y-8">
+                        <div className="flex flex-col sm:flex-row justify-between w-full sm:w-4/5 space-y-4 sm:space-y-0">
+                            <div className="text-center sm:text-left">
                                 <h2 className="text-2xl font-bold text-gray-700">Employee Details</h2>
                             </div>
-                            <div className="flex items-center space-x-4">
-                                <div className="flex items-center justify-between bg-white px-4 py-2 rounded-lg">
+                            <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                                <div className="flex items-center justify-between bg-white px-4 py-2 rounded-lg w-full sm:w-auto">
                                     <input
                                         type="text"
                                         id="emp-main-search_box"
@@ -109,23 +108,23 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                         <img src={searchIcon} alt="search" className="w-5 h-5" />
                                     </div>
                                 </div>
-                                <div className="flex items-center space-x-2 bg-[#82A70C] text-white py-2 px-4 rounded">
-                                    <NavLink to={"/empRegister"} className="flex items-center space-x-2 no-underline">
+                                <div className="flex items-center space-x-2 bg-[#82A70C] text-white py-2 px-4 rounded w-full sm:w-auto text-center">
+                                    <NavLink to={"/empRegister"} className="flex items-center justify-center space-x-2 no-underline w-full">
                                         <img src={addButton} alt="add" className="w-4 h-4" />
                                         <p>Add User</p>
                                     </NavLink>
                                 </div>
                             </div>
                         </div>
-                        <div className="w-4/5">
+                        <div className="w-full sm:w-4/5 overflow-x-auto">
                             <table className="w-full border-collapse">
                                 <thead className="bg-gray-700 text-white rounded-t">
                                     <tr>
                                         <td className="p-4 text-center">NAME</td>
-                                        <td className="p-4 text-center">GENDER</td>
-                                        <td className="p-4 text-center">DEPARTMENT</td>
-                                        <td className="p-4 text-center">SALARY</td>
-                                        <td className="p-4 text-center">START DATE</td>
+                                        <td className="p-4 text-center hidden sm:table-cell">GENDER</td>
+                                        <td className="p-4 text-center hidden md:table-cell">DEPARTMENT</td>
+                                        <td className="p-4 text-center hidden md:table-cell">SALARY</td>
+                                        <td className="p-4 text-center hidden sm:table-cell">START DATE</td>
                                         <td className="p-4 text-center">ACTION</td>
                                     </tr>
                                 </thead>
@@ -140,17 +139,17 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                                             alt={employee.name}
                                                             className="w-8 h-8 rounded-full"
                                                         />
-                                                        <span>{employee.name}</span>
+                                                        <span className="truncate max-w-[150px]">{employee.name}</span>
                                                     </div>
                                                 </td>
-                                                <td className="p-4 text-center bg-white">{employee.gender}</td>
-                                                <td className="p-4 text-center bg-white">
+                                                <td className="p-4 text-center bg-white hidden sm:table-cell">{employee.gender}</td>
+                                                <td className="p-4 text-center bg-white hidden md:table-cell">
                                                     {Array.isArray(employee.department)
                                                         ? employee.department.join(' ')
                                                         : employee.department}
                                                 </td>
-                                                <td className="p-4 text-center bg-white">{employee.salary}</td>
-                                                <td className="p-4 text-center bg-white">
+                                                <td className="p-4 text-center bg-white hidden md:table-cell">{employee.salary}</td>
+                                                <td className="p-4 text-center bg-white hidden sm:table-cell">
                                                     {this.formatDate(employee.startDate)}
                                                 </td>
                                                 <td className="p-4 text-center bg-white">
