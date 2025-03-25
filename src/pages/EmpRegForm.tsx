@@ -203,239 +203,236 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
         return (
             <>
                 <Header />
-                <div>
-                    <div className="w-full bg-[#F7F7F7] p-8 overflow-y-auto">
-                        <form data-testid="form" onSubmit={this.handleSubmit} className="w-full max-w-4xl mx-auto bg-white py-6 px-16 flex flex-col gap-8 text-left text-lg text-[#42515F]">
-                            <h2 className="text-left text-2xl font-bold text-[#42515F] capitalize">Employee Payroll Form</h2>
+                <div className="w-full bg-[#F7F7F7] p-4 md:p-8 overflow-y-auto">
+                    <form 
+                        data-testid="form" 
+                        onSubmit={this.handleSubmit} 
+                        className="w-full max-w-4xl mx-auto bg-white py-6 px-4 md:px-16 flex flex-col gap-8 text-left text-base md:text-lg text-[#42515F]"
+                    >
+                        <h2 className="text-left text-xl md:text-2xl font-bold text-[#42515F] capitalize">Employee Payroll Form</h2>
 
-                            <div className="flex flex-col gap-5">
-                                <div className="flex items-center gap-4">
-                                    <label htmlFor='name' className="w-1/4 min-w-24">Name</label>
-                                    <div className="w-3/4 relative">
-                                        <input
-                                            data-testid="input-fields"
-                                            type="text"
-                                            name="name"
-                                            id='name'
-                                            required
-                                            className={`w-full h-10 p-2 border rounded ${errors.name ? 'border-red-500' : 'border-[#BDBDBD]'}`}
-                                            value={this.state.name}
-                                            onChange={this.handleChange}
-                                        />
-                                        {errors.name && (
-                                            <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-red-500 text-sm pointer-events-none">
-                                                {errors.name}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <label className="w-1/4 min-w-24">Profile Image</label>
-                                    <div className="flex flex-wrap gap-6 w-3/4 sm:flex-row">
-                                        {profileImages.map((imgSrc, index) => (
-                                            <label key={index} className="flex gap-3 items-center">
-                                                <input
-                                                    data-testid="input-fields"
-                                                    type="radio"
-                                                    name="profileImage"
-                                                    value={imgSrc.value}
-                                                    className="w-5 h-5"
-                                                    checked={this.state.profileImage === imgSrc.value}
-                                                    onChange={this.handleChange}
-                                                />
-                                                <img src={imgSrc.src} alt={`Profile ${index + 1}`} className="w-8 h-8 rounded-full" />
-                                            </label>
-                                        ))}
-                                        {errors.profileImage && (
-                                            <span className="text-red-500 text-sm w-full">{errors.profileImage}</span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <label className="w-1/4 min-w-24 font-medium">Gender</label>
-                                    <div className="flex flex-col sm:flex-row sm:gap-6 gap-3 w-3/4">
-                                        <label htmlFor='male' className="flex items-center gap-4">
-                                            <input
-                                                data-testid="input-fields"
-                                                type="radio"
-                                                name="gender"
-                                                value="male"
-                                                id="male"
-                                                checked={this.state.gender === "male"}
-                                                onChange={this.handleChange}
-                                                className="w-5 h-5"
-                                            />
-                                            Male
-                                        </label>
-                                        <label htmlFor='female' className="flex items-center gap-4">
-                                            <input
-                                                data-testid="input-fields"
-                                                type="radio"
-                                                name="gender"
-                                                id='female'
-                                                value="female"
-                                                className="w-5 h-5"
-                                                checked={this.state.gender === "female"}
-                                                onChange={this.handleChange}
-                                            />
-                                            Female
-                                        </label>
-                                        {errors.gender && (
-                                            <span className="text-red-500 text-sm w-full">{errors.gender}</span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <label className="w-1/4 min-w-24 font-medium">Department</label>
-                                    <div className="flex flex-col sm:flex-row sm:flex-wrap sm:gap-4 gap-3 w-3/4">
-                                        {['HR', 'Sales', 'Finance', 'Engineer', 'Other'].map(dep => (
-                                            <label key={dep} className="flex items-center gap-4">
-                                                <input
-                                                    data-testid="input-fields"
-                                                    type="checkbox"
-                                                    name="department"
-                                                    value={dep}
-                                                    className="w-5 h-5 border rounded"
-                                                    checked={this.state.department.includes(dep)}
-                                                    onChange={this.handleChange}
-                                                />
-                                                {dep}
-                                            </label>
-                                        ))}
-                                        {errors.department && (
-                                            <span className="text-red-500 text-sm w-full">{errors.department}</span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-4">
-                                    <label className="w-1/4 min-w-24 font-medium">Salary</label>
-                                    <div className="w-3/4 relative">
-                                        <select
-                                            data-testid="salary-dropdown-fields"
-                                            name="salary"
-                                            required
-                                            value={this.state.salary}
-                                            onChange={this.handleChange}
-                                            className={`w-full sm:w-1/2 h-10 p-2 border rounded ${errors.salary ? 'border-red-500' : 'border-[#BDBDBD]'}`}
-                                        >
-                                            <option value="" disabled>Select Salary</option>
-                                            <option value="10000">₹10,000</option>
-                                            <option value="20000">₹20,000</option>
-                                            <option value="30000">₹30,000</option>
-                                        </select>
-                                        {errors.salary && (
-                                            <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-red-500 text-sm pointer-events-none">
-                                                {errors.salary}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <label className="w-1/4 min-w-24 font-medium">Start Date</label>
-                                    <div className="flex flex-col w-3/4 gap-3">
-                                        <div className="flex flex-col sm:flex-row sm:gap-4 gap-3">
-                                            <select
-                                                data-testid="input-fields"
-                                                name="startDate.day"
-                                                required
-                                                value={this.state.startDate.day}
-                                                onChange={this.handleChange}
-                                                className={`w-full sm:w-28 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
-                                            >
-                                                <option value="" disabled>Day</option>
-                                                {[...Array(31)].map((_, i) => <option key={i} value={i + 1}>{i + 1}</option>)}
-                                            </select>
-                                            <select
-                                                data-testid="input-fields"
-                                                name="startDate.month"
-                                                required
-                                                value={this.state.startDate.month}
-                                                onChange={this.handleChange}
-                                                className={`w-full sm:w-36 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
-                                            >
-                                                <option value="" disabled>Month</option>
-                                                {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((month, i) => (
-                                                    <option key={i} value={i + 1}>{month}</option>
-                                                ))}
-                                            </select>
-                                            <select
-                                                data-testid="input-fields"
-                                                name="startDate.year"
-                                                required
-                                                value={this.state.startDate.year}
-                                                onChange={this.handleChange}
-                                                className={`w-full sm:w-28 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
-                                            >
-                                                <option value="" disabled>Year</option>
-                                                {[2021, 2022, 2023, 2024, 2025].map(year => <option key={year} value={year}>{year}</option>)}
-                                            </select>
-                                        </div>
-                                        {errors.startDate && (
-                                            <span className="text-red-500 text-sm">{errors.startDate}</span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-4">
-                                    <label className="w-1/4 min-w-24 font-medium">Notes</label>
-                                    <textarea
+                        <div className="flex flex-col gap-5">
+                            <div className="flex flex-col md:flex-row items-center gap-4">
+                                <label htmlFor='name' className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0">Name</label>
+                                <div className="w-full md:w-3/4 relative">
+                                    <input
                                         data-testid="input-fields"
-                                        name="notes"
-                                        className="w-3/4 h-20 p-2 border border-[#BDBDBD] rounded"
-                                        value={this.state.notes}
+                                        type="text"
+                                        name="name"
+                                        id='name'
+                                        required
+                                        className={`w-full h-10 p-2 border rounded ${errors.name ? 'border-red-500' : 'border-[#BDBDBD]'}`}
+                                        value={this.state.name}
                                         onChange={this.handleChange}
                                     />
+                                    {errors.name && (
+                                        <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-red-500 text-sm pointer-events-none">
+                                            {errors.name}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
 
-                            <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
-                                <button
-                                    onClick={() => this.props.navigate('/')}
-                                    type="button"
-                                    className="w-full sm:w-1/4 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#707070] hover:text-white mb-4 sm:mb-0"
-                                >
-                                    Cancel
-                                </button>
-                                <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-2/4 justify-end">
-                                    {
-                                        this.state.empId ? (<>
-                                            <button
-                                                onClick={
-                                                    this.handleUpdate
-                                                }
-                                                type="button"
-                                                className="w-full sm:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#82A70C] hover:text-white mb-4 sm:mb-0"
-                                            >
-                                                Update
-                                            </button>
-                                        </>) : (<>
-                                            <button
-                                                type="submit"
-                                                id="submit-button"
-                                                className="w-full sm:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#82A70C] hover:text-white mb-4 sm:mb-0"
-                                            >
-                                                Submit
-                                            </button>
+                            <div className="flex flex-col md:flex-row items-start gap-4">
+                                <label className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0">Profile Image</label>
+                                <div className="flex flex-wrap gap-4 w-full md:w-3/4">
+                                    {profileImages.map((imgSrc, index) => (
+                                        <label key={index} className="flex gap-3 items-center">
+                                            <input
+                                                data-testid="input-fields"
+                                                type="radio"
+                                                name="profileImage"
+                                                value={imgSrc.value}
+                                                className="w-5 h-5"
+                                                checked={this.state.profileImage === imgSrc.value}
+                                                onChange={this.handleChange}
+                                            />
+                                            <img src={imgSrc.src} alt={`Profile ${index + 1}`} className="w-8 h-8 rounded-full" />
+                                        </label>
+                                    ))}
+                                    {errors.profileImage && (
+                                        <span className="text-red-500 text-sm w-full">{errors.profileImage}</span>
+                                    )}
+                                </div>
+                            </div>
 
-                                        </>)
-                                    }
+                            <div className="flex flex-col md:flex-row items-start gap-4">
+                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Gender</label>
+                                <div className="flex flex-col md:flex-row md:gap-6 gap-3 w-full md:w-3/4">
+                                    <label htmlFor='male' className="flex items-center gap-4">
+                                        <input
+                                            data-testid="input-fields"
+                                            type="radio"
+                                            name="gender"
+                                            value="male"
+                                            id="male"
+                                            checked={this.state.gender === "male"}
+                                            onChange={this.handleChange}
+                                            className="w-5 h-5"
+                                        />
+                                        Male
+                                    </label>
+                                    <label htmlFor='female' className="flex items-center gap-4">
+                                        <input
+                                            data-testid="input-fields"
+                                            type="radio"
+                                            name="gender"
+                                            id='female'
+                                            value="female"
+                                            className="w-5 h-5"
+                                            checked={this.state.gender === "female"}
+                                            onChange={this.handleChange}
+                                        />
+                                        Female
+                                    </label>
+                                    {errors.gender && (
+                                        <span className="text-red-500 text-sm w-full">{errors.gender}</span>
+                                    )}
+                                </div>
+                            </div>
 
-                                    <button
-                                        onClick={this.handleReset}
-                                        type="reset"
-                                        className="w-full sm:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#707070] hover:text-white"
+                            <div className="flex flex-col md:flex-row items-start gap-4">
+                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Department</label>
+                                <div className="flex flex-col md:flex-row md:flex-wrap md:gap-4 gap-3 w-full md:w-3/4">
+                                    {['HR', 'Sales', 'Finance', 'Engineer', 'Other'].map(dep => (
+                                        <label key={dep} className="flex items-center gap-4">
+                                            <input
+                                                data-testid="input-fields"
+                                                type="checkbox"
+                                                name="department"
+                                                value={dep}
+                                                className="w-5 h-5 border rounded"
+                                                checked={this.state.department.includes(dep)}
+                                                onChange={this.handleChange}
+                                            />
+                                            {dep}
+                                        </label>
+                                    ))}
+                                    {errors.department && (
+                                        <span className="text-red-500 text-sm w-full">{errors.department}</span>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row items-center gap-4">
+                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Salary</label>
+                                <div className="w-full md:w-3/4 relative">
+                                    <select
+                                        data-testid="salary-dropdown-fields"
+                                        name="salary"
+                                        required
+                                        value={this.state.salary}
+                                        onChange={this.handleChange}
+                                        className={`w-full h-10 p-2 border rounded ${errors.salary ? 'border-red-500' : 'border-[#BDBDBD]'}`}
                                     >
-                                        Reset
-                                    </button>
+                                        <option value="" disabled>Select Salary</option>
+                                        <option value="10000">₹10,000</option>
+                                        <option value="20000">₹20,000</option>
+                                        <option value="30000">₹30,000</option>
+                                    </select>
+                                    {errors.salary && (
+                                        <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-red-500 text-sm pointer-events-none">
+                                            {errors.salary}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
-                        </form>
-                    </div>
+
+                            <div className="flex flex-col md:flex-row items-start gap-4">
+                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Start Date</label>
+                                <div className="flex flex-col w-full md:w-3/4 gap-3">
+                                    <div className="flex flex-col md:flex-row md:gap-4 gap-3">
+                                        <select
+                                            data-testid="input-fields"
+                                            name="startDate.day"
+                                            required
+                                            value={this.state.startDate.day}
+                                            onChange={this.handleChange}
+                                            className={`w-full md:w-28 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
+                                        >
+                                            <option value="" disabled>Day</option>
+                                            {[...Array(31)].map((_, i) => <option key={i} value={i + 1}>{i + 1}</option>)}
+                                        </select>
+                                        <select
+                                            data-testid="input-fields"
+                                            name="startDate.month"
+                                            required
+                                            value={this.state.startDate.month}
+                                            onChange={this.handleChange}
+                                            className={`w-full md:w-36 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
+                                        >
+                                            <option value="" disabled>Month</option>
+                                            {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((month, i) => (
+                                                <option key={i} value={i + 1}>{month}</option>
+                                            ))}
+                                        </select>
+                                        <select
+                                            data-testid="input-fields"
+                                            name="startDate.year"
+                                            required
+                                            value={this.state.startDate.year}
+                                            onChange={this.handleChange}
+                                            className={`w-full md:w-28 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
+                                        >
+                                            <option value="" disabled>Year</option>
+                                            {[2021, 2022, 2023, 2024, 2025].map(year => <option key={year} value={year}>{year}</option>)}
+                                        </select>
+                                    </div>
+                                    {errors.startDate && (
+                                        <span className="text-red-500 text-sm">{errors.startDate}</span>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row items-start gap-4">
+                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Notes</label>
+                                <textarea
+                                    data-testid="input-fields"
+                                    name="notes"
+                                    className="w-full md:w-3/4 h-20 p-2 border border-[#BDBDBD] rounded"
+                                    value={this.state.notes}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col md:flex-row justify-between items-center mt-4 space-y-4 md:space-y-0">
+                            <button
+                                onClick={() => this.props.navigate('/')}
+                                type="button"
+                                className="w-full md:w-1/4 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#707070] hover:text-white"
+                            >
+                                Cancel
+                            </button>
+                            <div className="flex flex-col md:flex-row gap-4 w-full md:w-2/4 justify-end">
+                                {this.state.empId ? (
+                                    <button
+                                        onClick={this.handleUpdate}
+                                        type="button"
+                                        className="w-full md:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#82A70C] hover:text-white"
+                                    >
+                                        Update
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        id="submit-button"
+                                        className="w-full md:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#82A70C] hover:text-white"
+                                    >
+                                        Submit
+                                    </button>
+                                )}
+
+                                <button
+                                    onClick={this.handleReset}
+                                    type="reset"
+                                    className="w-full md:w-1/2 py-3 px-6 border border-[#969696] rounded cursor-pointer bg-[#E2E2E2] hover:bg-[#707070] hover:text-white"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </>
         );

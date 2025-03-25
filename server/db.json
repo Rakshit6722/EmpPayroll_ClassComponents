@@ -99,6 +99,25 @@
       "errors": {},
       "empId": "223d",
       "id": "223d"
+    },
+    {
+      "id": "9ae1",
+      "name": "asdfsafas",
+      "profileImage": "../assets/boy2.jpeg",
+      "gender": "male",
+      "department": [
+        "Sales",
+        "Finance"
+      ],
+      "salary": "10000",
+      "startDate": {
+        "day": "12",
+        "month": "11",
+        "year": "2022"
+      },
+      "notes": "",
+      "errors": {},
+      "empId": ""
     }
   ]
 }
