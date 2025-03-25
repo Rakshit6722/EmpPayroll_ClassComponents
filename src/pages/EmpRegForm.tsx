@@ -188,8 +188,8 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
         try {
             const response = await editEmployee(this.state.empId, this.state)
             if (response.status === 200) {
-                toast.success('Employee updated successfully')
                 localStorage.removeItem('empId')
+                toast.success('Employee updated successfully')
                 this.props.navigate('/')
             }
         } catch (err) {

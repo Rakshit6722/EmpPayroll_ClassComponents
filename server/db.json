@@ -41,8 +41,7 @@
       "id": "1766"
     },
     {
-      "id": "2bc7",
-      "name": "Rakshit Chauhan",
+      "name": "Rakshit Chauhan edited",
       "profileImage": "../assets/boy1.jpeg",
       "gender": "male",
       "department": [
@@ -57,7 +56,9 @@
         "year": "2023"
       },
       "notes": "",
-      "errors": {}
+      "errors": {},
+      "empId": "2bc7",
+      "id": "2bc7"
     },
     {
       "id": "7c91",
