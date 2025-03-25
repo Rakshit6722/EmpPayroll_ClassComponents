@@ -385,10 +385,11 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                             </div>
 
                             <div className="flex flex-col md:flex-row items-start gap-4">
-                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Notes</label>
+                                <label htmlFor='notes' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Notes</label>
                                 <textarea
                                     data-testid="input-fields"
                                     name="notes"
+                                    id='notes'
                                     className="w-full md:w-3/4 h-20 p-2 border border-[#BDBDBD] rounded"
                                     value={this.state.notes}
                                     onChange={this.handleChange}

@@ -34,7 +34,7 @@ export const deleteEmployee = async (id: string | number) => {
 
 export const editEmployee = async (id: string | number, data: any) => {
     try{
-        const response = axios.put(`${BASE_URL}/${id}`, data)
+        const response = await axios.put(`${BASE_URL}/${id}`, data)
         return response
     }catch(err){    
         console.log(err)
@@ -43,9 +43,9 @@ export const editEmployee = async (id: string | number, data: any) => {
 }
 
 
-export const getIndividualEmployee = (id: string) => {
+export const getIndividualEmployee = async (id: string) => {
     try{
-        const response = axios.get(`${BASE_URL}/${id}`)
+        const response = await axios.get(`${BASE_URL}/${id}`)
         return response
     }catch(err){
         console.log(err)

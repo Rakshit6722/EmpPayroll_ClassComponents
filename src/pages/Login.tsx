@@ -16,7 +16,7 @@ const Login: React.FC = () => {
 
     const handleSuccess = (credentialResponse: any) => {
         try {
-            const decoded = jwtDecode(credentialResponse.credential) as UserInfo;
+            const decoded = jwtDecode(credentialResponse.credential);
 
       
             localStorage.setItem('userInfo', JSON.stringify(decoded));
