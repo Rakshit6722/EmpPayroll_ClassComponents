@@ -36,7 +36,8 @@ interface EmpRegFormState {
         salary?: string;
         startDate?: string;
     };
-    empId: string
+    empId: string;
+    addEmployeemodalOpen: boolean
 }
 
 interface EmpRegFromProps {
@@ -55,7 +56,8 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
             startDate: { day: '', month: '', year: '' },
             notes: '',
             errors: {},
-            empId: localStorage.getItem('empId') ?? ''
+            empId: localStorage.getItem('empId') ?? '',
+            addEmployeemodalOpen: false
         };
     }
 
@@ -149,6 +151,12 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
             return;
         }
 
+        this.setState({
+            addEmployeemodalOpen: true
+        })
+    }
+
+    handleAddEmployee = async () => {
         try {
             const response = await addEmployee(this.state)
             if (response) {
@@ -204,35 +212,32 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
             <>
                 <Header />
                 <div className="w-full bg-[#F7F7F7] p-4 md:p-8 overflow-y-auto">
-                    <form 
-                        data-testid="form" 
-                        onSubmit={this.handleSubmit} 
+                    <form
+                        data-testid="form"
+                        onSubmit={this.handleSubmit}
                         className="w-full max-w-4xl mx-auto bg-white py-6 px-4 md:px-16 flex flex-col gap-8 text-left text-base md:text-lg text-[#42515F]"
                     >
                         <h2 className="text-left text-xl md:text-2xl font-bold text-[#42515F] capitalize">Employee Payroll Form</h2>
-
+    
                         <div className="flex flex-col gap-5">
-                            <div className="flex flex-col md:flex-row items-center gap-4">
+                            <div className="flex flex-col md:flex-row items-start gap-4">
                                 <label htmlFor='name' className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0">Name</label>
-                                <div className="w-full md:w-3/4 relative">
+                                <div className="w-full md:w-3/4">
                                     <input
                                         data-testid="input-fields"
                                         type="text"
                                         name="name"
                                         id='name'
-                                        required
                                         className={`w-full h-10 p-2 border rounded ${errors.name ? 'border-red-500' : 'border-[#BDBDBD]'}`}
                                         value={this.state.name}
                                         onChange={this.handleChange}
                                     />
                                     {errors.name && (
-                                        <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-red-500 text-sm pointer-events-none">
-                                            {errors.name}
-                                        </span>
+                                        <span className="text-red-500 text-sm mt-1 block">{errors.name}</span>
                                     )}
                                 </div>
                             </div>
-
+    
                             <div className="flex flex-col md:flex-row items-start gap-4">
                                 <label htmlFor='profileImage' className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0">Profile Image</label>
                                 <div className="flex flex-wrap gap-4 w-full md:w-3/4">
@@ -252,76 +257,79 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                         </label>
                                     ))}
                                     {errors.profileImage && (
-                                        <span className="text-red-500 text-sm w-full">{errors.profileImage}</span>
+                                        <span className="text-red-500 text-sm mt-1 block w-full">{errors.profileImage}</span>
                                     )}
                                 </div>
                             </div>
-
+    
                             <div className="flex flex-col md:flex-row items-start gap-4">
                                 <label htmlFor='genderRadioButtons' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Gender</label>
-                                <div className="flex flex-col md:flex-row md:gap-6 gap-3 w-full md:w-3/4">
-                                    <label htmlFor='male' className="flex items-center gap-4">
-                                        <input
-                                            data-testid="input-fields"
-                                            type="radio"
-                                            name="gender"
-                                            value="male"
-                                            id="male"
-                                            checked={this.state.gender === "male"}
-                                            onChange={this.handleChange}
-                                            className="w-5 h-5"
-                                            />
-                                        Male
-                                    </label>
-                                    <label htmlFor='female' className="flex items-center gap-4">
-                                        <input
-                                            data-testid="input-fields"
-                                            type="radio"
-                                            name="gender"
-                                            id='female'
-                                            value="female"
-                                            className="w-5 h-5"
-                                            checked={this.state.gender === "female"}
-                                            onChange={this.handleChange}
-                                        />
-                                        Female
-                                    </label>
-                                    {errors.gender && (
-                                        <span className="text-red-500 text-sm w-full">{errors.gender}</span>
-                                    )}
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col md:flex-row items-start gap-4">
-                                <label htmlFor='departmentCheckbox' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Department</label>
-                                <div className="flex flex-col md:flex-row md:flex-wrap md:gap-4 gap-3 w-full md:w-3/4">
-                                    {['HR', 'Sales', 'Finance', 'Engineer', 'Other'].map(dep => (
-                                        <label key={dep} className="flex items-center gap-4">
+                                <div className="w-full md:w-3/4">
+                                    <div className="flex flex-col md:flex-row md:gap-6 gap-3">
+                                        <label htmlFor='male' className="flex items-center gap-4">
                                             <input
                                                 data-testid="input-fields"
-                                                type="checkbox"
-                                                name="department"
-                                                value={dep}
-                                                className="w-5 h-5 border rounded"
-                                                checked={this.state.department.includes(dep)}
+                                                type="radio"
+                                                name="gender"
+                                                value="male"
+                                                id="male"
+                                                checked={this.state.gender === "male"}
+                                                onChange={this.handleChange}
+                                                className="w-5 h-5"
+                                            />
+                                            Male
+                                        </label>
+                                        <label htmlFor='female' className="flex items-center gap-4">
+                                            <input
+                                                data-testid="input-fields"
+                                                type="radio"
+                                                name="gender"
+                                                id='female'
+                                                value="female"
+                                                className="w-5 h-5"
+                                                checked={this.state.gender === "female"}
                                                 onChange={this.handleChange}
                                             />
-                                            {dep}
+                                            Female
                                         </label>
-                                    ))}
-                                    {errors.department && (
-                                        <span className="text-red-500 text-sm w-full">{errors.department}</span>
+                                    </div>
+                                    {errors.gender && (
+                                        <span className="text-red-500 text-sm mt-1 block">{errors.gender}</span>
                                     )}
                                 </div>
                             </div>
-
-                            <div className="flex flex-col md:flex-row items-center gap-4">
+    
+                            <div className="flex flex-col md:flex-row items-start gap-4">
+                                <label htmlFor='departmentCheckbox' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Department</label>
+                                <div className="w-full md:w-3/4">
+                                    <div className="flex flex-col md:flex-row md:flex-wrap md:gap-4 gap-3">
+                                        {['HR', 'Sales', 'Finance', 'Engineer', 'Other'].map(dep => (
+                                            <label key={dep} className="flex items-center gap-4">
+                                                <input
+                                                    data-testid="input-fields"
+                                                    type="checkbox"
+                                                    name="department"
+                                                    value={dep}
+                                                    className="w-5 h-5 border rounded"
+                                                    checked={this.state.department.includes(dep)}
+                                                    onChange={this.handleChange}
+                                                />
+                                                {dep}
+                                            </label>
+                                        ))}
+                                    </div>
+                                    {errors.department && (
+                                        <span className="text-red-500 text-sm mt-1 block">{errors.department}</span>
+                                    )}
+                                </div>
+                            </div>
+    
+                            <div className="flex flex-col md:flex-row items-start gap-4">
                                 <label htmlFor='salary' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Salary</label>
-                                <div className="w-full md:w-3/4 relative">
+                                <div className="w-full md:w-3/4">
                                     <select
                                         data-testid="salary-dropdown-fields"
                                         name="salary"
-                                        required
                                         value={this.state.salary}
                                         onChange={this.handleChange}
                                         className={`w-full h-10 p-2 border rounded ${errors.salary ? 'border-red-500' : 'border-[#BDBDBD]'}`}
@@ -332,21 +340,18 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                         <option value="30000">₹30,000</option>
                                     </select>
                                     {errors.salary && (
-                                        <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-red-500 text-sm pointer-events-none">
-                                            {errors.salary}
-                                        </span>
+                                        <span className="text-red-500 text-sm mt-1 block">{errors.salary}</span>
                                     )}
                                 </div>
                             </div>
-
+    
                             <div className="flex flex-col md:flex-row items-start gap-4">
                                 <label htmlFor='startDate' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Start Date</label>
-                                <div className="flex flex-col w-full md:w-3/4 gap-3">
+                                <div className="w-full md:w-3/4">
                                     <div className="flex flex-col md:flex-row md:gap-4 gap-3">
                                         <select
                                             data-testid="input-fields"
                                             name="startDate.day"
-                                            required
                                             value={this.state.startDate.day}
                                             onChange={this.handleChange}
                                             className={`w-full md:w-28 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
@@ -360,7 +365,6 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                         <select
                                             data-testid="input-fields"
                                             name="startDate.month"
-                                            required
                                             value={this.state.startDate.month}
                                             onChange={this.handleChange}
                                             className={`w-full md:w-36 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
@@ -373,7 +377,6 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                         <select
                                             data-testid="input-fields"
                                             name="startDate.year"
-                                            required
                                             value={this.state.startDate.year}
                                             onChange={this.handleChange}
                                             className={`w-full md:w-28 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
@@ -383,11 +386,11 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                         </select>
                                     </div>
                                     {errors.startDate && (
-                                        <span className="text-red-500 text-sm">{errors.startDate}</span>
+                                        <span className="text-red-500 text-sm mt-1 block">{errors.startDate}</span>
                                     )}
                                 </div>
                             </div>
-
+    
                             <div className="flex flex-col md:flex-row items-start gap-4">
                                 <label htmlFor='notes' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Notes</label>
                                 <textarea
@@ -400,7 +403,8 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                 />
                             </div>
                         </div>
-
+    
+                        {/* Rest of the form remains unchanged */}
                         <div className="flex flex-col md:flex-row justify-between items-center mt-4 space-y-4 md:space-y-0">
                             <button
                                 onClick={() => this.props.navigate('/')}
@@ -427,7 +431,6 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                         Submit
                                     </button>
                                 )}
-
                                 <button
                                     onClick={this.handleReset}
                                     type="reset"
@@ -439,6 +442,28 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                         </div>
                     </form>
                 </div>
+                {this.state.addEmployeemodalOpen && (
+                    <>
+                        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50"></div>
+                        <div className="fixed p-8 top-1/2 left-1/2 rounded-md transform -translate-x-1/2 -translate-y-1/2 bg-white z-50 ">
+                            <h2 className="text-xl font-bold text-[#42515F]">Are you sure you want to add the employee?</h2>
+                            <div className="flex justify-end gap-4 mt-4">
+                                <button
+                                    onClick={() => this.setState({ addEmployeemodalOpen: false })}
+                                    className="py-2 px-4 border border-[#969696] rounded cursor-pointer bg-[red] hover:bg-[#707070] text-white hover:text-white"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={this.handleAddEmployee}
+                                    className="py-2 px-4 border border-[#969696] rounded cursor-pointer bg-[#82A70C] hover:bg-[#707070] text-white hover:text-white"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </>
+                )}
             </>
         );
     }
