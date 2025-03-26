@@ -55,7 +55,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
             startDate: { day: '', month: '', year: '' },
             notes: '',
             errors: {},
-            empId: localStorage.getItem('empId') || ''
+            empId: localStorage.getItem('empId') ?? ''
         };
     }
 
@@ -87,14 +87,14 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                 }
             }));
         } else {
-            this.setState({
-                ...this.state,
+            this.setState((prevState) => ({
+                ...prevState,
                 [name]: value,
                 errors: {
-                    ...this.state.errors,
+                    ...prevState.errors,
                     [name]: undefined
                 }
-            });
+            }))
         }
     }
 
@@ -234,11 +234,12 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                             </div>
 
                             <div className="flex flex-col md:flex-row items-start gap-4">
-                                <label className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0">Profile Image</label>
+                                <label htmlFor='profileImage' className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0">Profile Image</label>
                                 <div className="flex flex-wrap gap-4 w-full md:w-3/4">
                                     {profileImages.map((imgSrc, index) => (
-                                        <label key={index} className="flex gap-3 items-center">
+                                        <label key={imgSrc.value} className="flex gap-3 items-center">
                                             <input
+                                                id='profileImage'
                                                 data-testid="input-fields"
                                                 type="radio"
                                                 name="profileImage"
@@ -257,7 +258,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                             </div>
 
                             <div className="flex flex-col md:flex-row items-start gap-4">
-                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Gender</label>
+                                <label htmlFor='genderRadioButtons' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Gender</label>
                                 <div className="flex flex-col md:flex-row md:gap-6 gap-3 w-full md:w-3/4">
                                     <label htmlFor='male' className="flex items-center gap-4">
                                         <input
@@ -269,7 +270,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                             checked={this.state.gender === "male"}
                                             onChange={this.handleChange}
                                             className="w-5 h-5"
-                                        />
+                                            />
                                         Male
                                     </label>
                                     <label htmlFor='female' className="flex items-center gap-4">
@@ -292,7 +293,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                             </div>
 
                             <div className="flex flex-col md:flex-row items-start gap-4">
-                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Department</label>
+                                <label htmlFor='departmentCheckbox' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Department</label>
                                 <div className="flex flex-col md:flex-row md:flex-wrap md:gap-4 gap-3 w-full md:w-3/4">
                                     {['HR', 'Sales', 'Finance', 'Engineer', 'Other'].map(dep => (
                                         <label key={dep} className="flex items-center gap-4">
@@ -315,7 +316,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                             </div>
 
                             <div className="flex flex-col md:flex-row items-center gap-4">
-                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Salary</label>
+                                <label htmlFor='salary' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Salary</label>
                                 <div className="w-full md:w-3/4 relative">
                                     <select
                                         data-testid="salary-dropdown-fields"
@@ -339,7 +340,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                             </div>
 
                             <div className="flex flex-col md:flex-row items-start gap-4">
-                                <label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Start Date</label>
+                                <label htmlFor='startDate' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Start Date</label>
                                 <div className="flex flex-col w-full md:w-3/4 gap-3">
                                     <div className="flex flex-col md:flex-row md:gap-4 gap-3">
                                         <select
@@ -351,7 +352,10 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                             className={`w-full md:w-28 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
                                         >
                                             <option value="" disabled>Day</option>
-                                            {[...Array(31)].map((_, i) => <option key={i} value={i + 1}>{i + 1}</option>)}
+                                            {[...Array(31)].map((_, i) => {
+                                                const day = i + 1;
+                                                return <option key={day} value={day}>{day}</option>;
+                                            })}
                                         </select>
                                         <select
                                             data-testid="input-fields"
@@ -363,7 +367,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                                         >
                                             <option value="" disabled>Month</option>
                                             {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((month, i) => (
-                                                <option key={i} value={i + 1}>{month}</option>
+                                                <option key={month} value={i + 1}>{month}</option>
                                             ))}
                                         </select>
                                         <select

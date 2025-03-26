@@ -4,11 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 
-interface UserInfo {
-    name: string;
-    email: string;
-    picture?: string;
-}
+
 
 const Login: React.FC = () => {
     const navigate = useNavigate();

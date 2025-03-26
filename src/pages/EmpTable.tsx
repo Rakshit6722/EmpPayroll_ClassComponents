@@ -138,11 +138,25 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                             <tr key={employee.id} className="border-b border-gray-200">
                                                 <td className="p-4 bg-white">
                                                     <div className="flex items-center space-x-4">
-                                                        <img
-                                                            src={employee.profileImage === '../assets/boy1.jpeg' ? boy1 : employee.profileImage === '../assets/boy2.jpeg' ? boy2 : employee.profileImage === '../assets/girl1.jpeg' ? girl1 : girl2}
-                                                            alt={employee.name}
-                                                            className="w-8 h-8 rounded-full"
-                                                        />
+                                                        {(() => {
+                                                            let profileImageSrc;
+                                                            if (employee.profileImage === '../assets/boy1.jpeg') {
+                                                                profileImageSrc = boy1;
+                                                            } else if (employee.profileImage === '../assets/boy2.jpeg') {
+                                                                profileImageSrc = boy2;
+                                                            } else if (employee.profileImage === '../assets/girl1.jpeg') {
+                                                                profileImageSrc = girl1;
+                                                            } else {
+                                                                profileImageSrc = girl2;
+                                                            }
+                                                            return (
+                                                                <img
+                                                                    src={profileImageSrc}
+                                                                    alt={employee.name}
+                                                                    className="w-8 h-8 rounded-full"
+                                                                />
+                                                            );
+                                                        })()}
                                                         <span className="truncate max-w-[150px]">{employee.name}</span>
                                                     </div>
                                                 </td>
@@ -158,18 +172,28 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                                 </td>
                                                 <td className="p-4 text-center bg-white">
                                                     <div className="flex justify-center space-x-2">
-                                                        <img
-                                                            src={deleteIcon}
-                                                            alt="delete"
-                                                            className="w-5 h-5 cursor-pointer"
+                                                        <button
                                                             onClick={() => this.handleDelete(employee.id)}
-                                                        />
-                                                        <img
-                                                            src={editIcon}
-                                                            alt="edit"
-                                                            className="w-5 h-5 cursor-pointer"
+                                                            className="p-0 border-none bg-transparent cursor-pointer"
+                                                            aria-label="Delete Employee"
+                                                        >
+                                                            <img
+                                                                src={deleteIcon}
+                                                                alt="delete"
+                                                                className="w-5 h-5"
+                                                            />
+                                                        </button>
+                                                        <button
                                                             onClick={() => this.handleEdit(employee.id)}
-                                                        />
+                                                            className="p-0 border-none bg-transparent cursor-pointer"
+                                                            aria-label="Edit Employee"
+                                                        >
+                                                            <img
+                                                                src={editIcon}
+                                                                alt="edit"
+                                                                className="w-5 h-5"
+                                                            />
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
