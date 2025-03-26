@@ -20,7 +20,7 @@ class Header extends Component<HeaderProps> {
         const { container } = this.props;
 
         return (
-            <div className="w-full h-16 bg-white flex justify-between items-center px-6 shadow-md">
+            <div className="w-full py-4 bg-white flex justify-between items-center px-8 p shadow-md">
                 <div className="flex gap-2 items-center">
                     <img className="w-10 h-10" src={logo} alt="logo" />
                     <div>
