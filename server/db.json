@@ -20,27 +20,6 @@
       "errors": {}
     },
     {
-      "name": "Rakshit edited",
-      "profileImage": "../assets/boy1.jpeg",
-      "gender": "male",
-      "department": [
-        "Sales",
-        "Finance",
-        "Engineer",
-        "HR"
-      ],
-      "salary": "10000",
-      "startDate": {
-        "day": "15",
-        "month": "10",
-        "year": "2023"
-      },
-      "notes": "",
-      "errors": {},
-      "empId": "1766",
-      "id": "1766"
-    },
-    {
       "name": "Rakshit Chauhan edited",
       "profileImage": "../assets/boy1.jpeg",
       "gender": "male",
@@ -80,6 +59,25 @@
       "errors": {},
       "empId": "7c91",
       "id": "7c91"
+    },
+    {
+      "id": "1249",
+      "name": "asdfasdf",
+      "profileImage": "../assets/boy2.jpeg",
+      "gender": "male",
+      "department": [
+        "HR"
+      ],
+      "salary": "20000",
+      "startDate": {
+        "day": "14",
+        "month": "11",
+        "year": "2021"
+      },
+      "notes": "asdfa",
+      "errors": {},
+      "empId": "",
+      "modalOpen": false
     }
   ]
 }
