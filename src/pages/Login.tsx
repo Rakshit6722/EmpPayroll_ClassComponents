@@ -64,8 +64,7 @@ const Login: React.FC = () => {
 };
 
 const GoogleAuthWrapper: React.FC = () => {
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || 
-                     "944752384992-itkfqv0lnl5vapktga9iiu4465ikeukq.apps.googleusercontent.com";
+    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
     return (
         <GoogleOAuthProvider clientId={clientId}>

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL = 'http://localhost:3000/employeeList'
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export const addEmployee = async (data: any) => {
     try{
