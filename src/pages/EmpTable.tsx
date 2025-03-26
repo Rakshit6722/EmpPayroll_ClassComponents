@@ -7,6 +7,10 @@ import editIcon from '../assets/pen.png'
 import searchIcon from '../assets/search_icon.png'
 import { NavigateFunction, NavLink } from 'react-router-dom';
 import { withRouter } from '../utils/withRouter';
+import boy1 from '../assets/boy1.jpeg'
+import boy2 from '../assets/boy2.jpeg'
+import girl1 from '../assets/girl1.jpeg'
+import girl2 from '../assets/girl2.jpeg'
 
 interface EmpTableState {
     employees: Array<{
@@ -135,7 +139,7 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                                 <td className="p-4 bg-white">
                                                     <div className="flex items-center space-x-4">
                                                         <img
-                                                            src={employee.profileImage}
+                                                            src={employee.profileImage === '../assets/boy1.jpeg' ? boy1 : employee.profileImage === '../assets/boy2.jpeg' ? boy2 : employee.profileImage === '../assets/girl1.jpeg' ? girl1 : girl2}
                                                             alt={employee.name}
                                                             className="w-8 h-8 rounded-full"
                                                         />

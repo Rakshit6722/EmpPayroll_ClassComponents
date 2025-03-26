@@ -61,8 +61,7 @@
       "id": "2bc7"
     },
     {
-      "id": "7c91",
-      "name": "Rakshit edited",
+      "name": "Rakshit edited 2",
       "profileImage": "../assets/boy1.jpeg",
       "gender": "male",
       "department": [
@@ -79,26 +78,8 @@
       },
       "notes": "",
       "errors": {},
-      "empId": "1766"
-    },
-    {
-      "name": "Rakshit ",
-      "profileImage": "../assets/boy2.jpeg",
-      "gender": "male",
-      "department": [
-        "HR",
-        "Sales"
-      ],
-      "salary": "10000",
-      "startDate": {
-        "day": "15",
-        "month": "11",
-        "year": "2021"
-      },
-      "notes": "",
-      "errors": {},
-      "empId": "223d",
-      "id": "223d"
+      "empId": "7c91",
+      "id": "7c91"
     },
     {
       "id": "9ae1",
