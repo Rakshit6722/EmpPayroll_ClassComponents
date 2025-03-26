@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.14% </span>
+                <span class="strong">86.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>317/368</span>
+                <span class='fraction'>321/372</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">91.83% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>44/48</span>
+                <span class='fraction'>45/49</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.14% </span>
+                <span class="strong">86.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>317/368</span>
+                <span class='fraction'>321/372</span>
             </div>
         
             
@@ -505,7 +505,11 @@
 <a name='L440'></a><a href='#L440'>440</a>
 <a name='L441'></a><a href='#L441'>441</a>
 <a name='L442'></a><a href='#L442'>442</a>
-<a name='L443'></a><a href='#L443'>443</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L443'></a><a href='#L443'>443</a>
+<a name='L444'></a><a href='#L444'>444</a>
+<a name='L445'></a><a href='#L445'>445</a>
+<a name='L446'></a><a href='#L446'>446</a>
+<a name='L447'></a><a href='#L447'>447</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -756,6 +760,7 @@
 <span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-yes">156x</span>
+<span class="cline-any cline-yes">156x</span>
 <span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -858,6 +863,9 @@
 <span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-yes">1209x</span>
+<span class="cline-any cline-yes">1209x</span>
 <span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-yes">39x</span>
@@ -1004,7 +1012,7 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
             startDate: { day: '', month: '', year: '' },
             notes: '',
             errors: {},
-            empId: localStorage.getItem('empId') || ''
+            empId: localStorage.getItem('empId') ?? ''
         };
     }
 &nbsp;
@@ -1036,14 +1044,14 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                 }
             }));
         } else {
-            this.setState({
-                ...this.state,
+            this.setState((prevState) =&gt; ({
+                ...prevState,
                 [name]: value,
                 errors: {
-                    ...this.state.errors,
+                    ...prevState.errors,
                     [name]: undefined
                 }
-            });
+            }))
         }
     }
 &nbsp;
@@ -1183,11 +1191,12 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                             &lt;/div&gt;
 &nbsp;
                             &lt;div className="flex flex-col md:flex-row items-start gap-4"&gt;
-                                &lt;label className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0"&gt;Profile Image&lt;/label&gt;
+                                &lt;label htmlFor='profileImage' className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0"&gt;Profile Image&lt;/label&gt;
                                 &lt;div className="flex flex-wrap gap-4 w-full md:w-3/4"&gt;
                                     {profileImages.map((imgSrc, index) =&gt; (
-                                        &lt;label key={index} className="flex gap-3 items-center"&gt;
+                                        &lt;label key={imgSrc.value} className="flex gap-3 items-center"&gt;
                                             &lt;input
+                                                id='profileImage'
                                                 data-testid="input-fields"
                                                 type="radio"
                                                 name="profileImage"
@@ -1206,7 +1215,7 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                             &lt;/div&gt;
 &nbsp;
                             &lt;div className="flex flex-col md:flex-row items-start gap-4"&gt;
-                                &lt;label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0"&gt;Gender&lt;/label&gt;
+                                &lt;label htmlFor='genderRadioButtons' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0"&gt;Gender&lt;/label&gt;
                                 &lt;div className="flex flex-col md:flex-row md:gap-6 gap-3 w-full md:w-3/4"&gt;
                                     &lt;label htmlFor='male' className="flex items-center gap-4"&gt;
                                         &lt;input
@@ -1218,7 +1227,7 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                                             checked={this.state.gender === "male"}
                                             onChange={this.handleChange}
                                             className="w-5 h-5"
-                                        /&gt;
+                                            /&gt;
                                         Male
                                     &lt;/label&gt;
                                     &lt;label htmlFor='female' className="flex items-center gap-4"&gt;
@@ -1241,7 +1250,7 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                             &lt;/div&gt;
 &nbsp;
                             &lt;div className="flex flex-col md:flex-row items-start gap-4"&gt;
-                                &lt;label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0"&gt;Department&lt;/label&gt;
+                                &lt;label htmlFor='departmentCheckbox' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0"&gt;Department&lt;/label&gt;
                                 &lt;div className="flex flex-col md:flex-row md:flex-wrap md:gap-4 gap-3 w-full md:w-3/4"&gt;
                                     {['HR', 'Sales', 'Finance', 'Engineer', 'Other'].map(dep =&gt; (
                                         &lt;label key={dep} className="flex items-center gap-4"&gt;
@@ -1264,7 +1273,7 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                             &lt;/div&gt;
 &nbsp;
                             &lt;div className="flex flex-col md:flex-row items-center gap-4"&gt;
-                                &lt;label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0"&gt;Salary&lt;/label&gt;
+                                &lt;label htmlFor='salary' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0"&gt;Salary&lt;/label&gt;
                                 &lt;div className="w-full md:w-3/4 relative"&gt;
                                     &lt;select
                                         data-testid="salary-dropdown-fields"
@@ -1288,7 +1297,7 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                             &lt;/div&gt;
 &nbsp;
                             &lt;div className="flex flex-col md:flex-row items-start gap-4"&gt;
-                                &lt;label className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0"&gt;Start Date&lt;/label&gt;
+                                &lt;label htmlFor='startDate' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0"&gt;Start Date&lt;/label&gt;
                                 &lt;div className="flex flex-col w-full md:w-3/4 gap-3"&gt;
                                     &lt;div className="flex flex-col md:flex-row md:gap-4 gap-3"&gt;
                                         &lt;select
@@ -1300,7 +1309,10 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                                             className={`w-full md:w-28 h-10 p-2 border rounded ${errors.startDate ? 'border-red-500' : 'border-[#BDBDBD]'}`}
                                         &gt;
                                             &lt;option value="" disabled&gt;Day&lt;/option&gt;
-                                            {[...Array(31)].map((_, i) =&gt; &lt;option key={i} value={i + 1}&gt;{i + 1}&lt;/option&gt;)}
+                                            {[...Array(31)].map((_, i) =&gt; {
+                                                const day = i + 1;
+                                                return &lt;option key={day} value={day}&gt;{day}&lt;/option&gt;;
+                                            })}
                                         &lt;/select&gt;
                                         &lt;select
                                             data-testid="input-fields"
@@ -1312,7 +1324,7 @@ export class EmpRegForm extends Component&lt;EmpRegFromProps, EmpRegFormState&gt
                                         &gt;
                                             &lt;option value="" disabled&gt;Month&lt;/option&gt;
                                             {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((month, i) =&gt; (
-                                                &lt;option key={i} value={i + 1}&gt;{month}&lt;/option&gt;
+                                                &lt;option key={month} value={i + 1}&gt;{month}&lt;/option&gt;
                                             ))}
                                         &lt;/select&gt;
                                         &lt;select
@@ -1396,7 +1408,7 @@ export default withRouter(EmpRegForm);</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-25T21:25:04.008Z
+                at 2025-03-26T05:50:46.109Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

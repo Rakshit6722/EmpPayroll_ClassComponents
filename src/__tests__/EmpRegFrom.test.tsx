@@ -208,7 +208,7 @@ describe("Employee register form handleSubmit", () => {
         );
     })
 
-    test("submits form with validation date", async () => {
+    test("submits form with validation data", async () => {
         const mockAddEmployee = vi.mocked(Api.addEmployee).mockResolvedValue({
             status: 200,
             data: {},
