@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.89% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/47</span>
+                <span class='fraction'>7/42</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.89% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/47</span>
+                <span class='fraction'>7/42</span>
             </div>
         
             
@@ -112,16 +112,11 @@
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -135,13 +130,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -158,11 +152,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -178,7 +170,6 @@ export const addEmployee = <span class="fstat-no" title="function not covered" >
 <span class="cstat-no" title="statement not covered" >        const response = await axios.post(BASE_URL, data)</span>
 <span class="cstat-no" title="statement not covered" >        return response</span>
 <span class="cstat-no" title="statement not covered" >    }catch(err){</span>
-<span class="cstat-no" title="statement not covered" >        console.log(err)</span>
 <span class="cstat-no" title="statement not covered" >        throw err</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
@@ -188,7 +179,7 @@ export const getEmployees = <span class="fstat-no" title="function not covered" 
 <span class="cstat-no" title="statement not covered" >        const resposne = await axios.get(BASE_URL)</span>
 <span class="cstat-no" title="statement not covered" >        return resposne</span>
 <span class="cstat-no" title="statement not covered" >    }catch(err){</span>
-<span class="cstat-no" title="statement not covered" >        console.log(err)</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >        throw err </span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
@@ -198,7 +189,6 @@ export const deleteEmployee = <span class="fstat-no" title="function not covered
 <span class="cstat-no" title="statement not covered" >        const response = await axios.delete(`${BASE_URL}/${id}`)</span>
 <span class="cstat-no" title="statement not covered" >        return response</span>
 <span class="cstat-no" title="statement not covered" >    }catch(err){</span>
-<span class="cstat-no" title="statement not covered" >        console.log(err)</span>
 <span class="cstat-no" title="statement not covered" >        throw err</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
@@ -208,7 +198,6 @@ export const editEmployee = <span class="fstat-no" title="function not covered" 
 <span class="cstat-no" title="statement not covered" >        const response = await axios.put(`${BASE_URL}/${id}`, data)</span>
 <span class="cstat-no" title="statement not covered" >        return response</span>
 <span class="cstat-no" title="statement not covered" >    }catch(err){    </span>
-<span class="cstat-no" title="statement not covered" >        console.log(err)</span>
 <span class="cstat-no" title="statement not covered" >        throw err</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
@@ -219,7 +208,6 @@ export const getIndividualEmployee = <span class="fstat-no" title="function not 
 <span class="cstat-no" title="statement not covered" >        const response = await axios.get(`${BASE_URL}/${id}`)</span>
 <span class="cstat-no" title="statement not covered" >        return response</span>
 <span class="cstat-no" title="statement not covered" >    }catch(err){</span>
-<span class="cstat-no" title="statement not covered" >        console.log(err)</span>
 <span class="cstat-no" title="statement not covered" >        throw err</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >}</span></pre></td></tr></table></pre>
@@ -229,7 +217,7 @@ export const getIndividualEmployee = <span class="fstat-no" title="function not 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-27T04:41:33.408Z
+                at 2025-03-27T08:33:41.152Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

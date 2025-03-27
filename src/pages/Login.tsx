@@ -3,6 +3,7 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { toast } from 'react-toastify';
 
 
 
@@ -21,7 +22,6 @@ const Login: React.FC = () => {
 
             navigate('/empTable');
         } catch (error) {
-            console.error('Error decoding credential', error);
             setError('Authentication failed. Please try again.');
         }
     };

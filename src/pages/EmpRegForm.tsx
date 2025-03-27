@@ -121,8 +121,8 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                 });
             }
 
-        } catch (err) {
-            console.log(err)
+        } catch (err: any) {
+            toast.error(err?.message)
         }
     }
 
@@ -173,8 +173,8 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                     errors: {}
                 })
             }
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            toast.error(err.message)
         }
     }
 
@@ -200,8 +200,8 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                 toast.success('Employee updated successfully')
                 this.props.navigate('/')
             }
-        } catch (err) {
-            console.log(err)
+        } catch (err: any) {
+            toast.error(err?.message)
         }
     }
 

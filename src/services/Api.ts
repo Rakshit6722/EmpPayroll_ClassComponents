@@ -7,7 +7,6 @@ export const addEmployee = async (data: any) => {
         const response = await axios.post(BASE_URL, data)
         return response
     }catch(err){
-        console.log(err)
         throw err
     }
 }
@@ -17,7 +16,7 @@ export const getEmployees = async () => {
         const resposne = await axios.get(BASE_URL)
         return resposne
     }catch(err){
-        console.log(err)
+
         throw err 
     }
 }
@@ -27,7 +26,6 @@ export const deleteEmployee = async (id: string | number) => {
         const response = await axios.delete(`${BASE_URL}/${id}`)
         return response
     }catch(err){
-        console.log(err)
         throw err
     }
 }
@@ -37,7 +35,6 @@ export const editEmployee = async (id: string | number, data: any) => {
         const response = await axios.put(`${BASE_URL}/${id}`, data)
         return response
     }catch(err){    
-        console.log(err)
         throw err
     }
 }
@@ -48,7 +45,6 @@ export const getIndividualEmployee = async (id: string) => {
         const response = await axios.get(`${BASE_URL}/${id}`)
         return response
     }catch(err){
-        console.log(err)
         throw err
     }
 }

@@ -12,6 +12,7 @@ import boy2 from '../assets/boy2.jpeg'
 import girl1 from '../assets/girl1.jpeg'
 import girl2 from '../assets/girl2.jpeg'
 import crossIcon from '../assets/cross-icon.png'
+import { toast } from 'react-toastify';
 
 interface EmpTableState {
     employees: Array<{
@@ -57,9 +58,8 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
         try {
             const response = await getEmployees();
             this.setState({ employees: response.data });
-            console.log(response?.data);
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            toast.error(err?.message)
         }
     };
 
@@ -70,7 +70,6 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
 
     handleDelete = async () => {
         try {
-            // console.log(id)
             const response = await deleteEmployee(String(this.state.deleteEmpId));
             if (response.status === 200) {
                 this.fetchData();
@@ -79,8 +78,8 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                     deleteEmpId: "" 
                 })
             }
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            toast.error(err?.message)
         }
     }
 
