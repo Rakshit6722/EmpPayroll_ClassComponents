@@ -221,7 +221,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
     
                         <div className="flex flex-col gap-5">
                             <div className="flex flex-col md:flex-row items-start gap-4">
-                                <label htmlFor='name' className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0">Name</label>
+                                <label htmlFor='name' className="w-full md:w-1/4 min-w-24 mb-2 font-medium md:mb-0">Name</label>
                                 <div className="w-full md:w-3/4">
                                     <input
                                         data-testid="input-fields"
@@ -239,7 +239,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                             </div>
     
                             <div className="flex flex-col md:flex-row items-start gap-4">
-                                <label htmlFor='profileImage' className="w-full md:w-1/4 min-w-24 mb-2 md:mb-0">Profile Image</label>
+                                <label htmlFor='profileImage' className="w-full md:w-1/4 font-medium min-w-24 mb-2 md:mb-0">Profile Image</label>
                                 <div className="flex flex-wrap gap-4 w-full md:w-3/4">
                                     {profileImages.map((imgSrc, index) => (
                                         <label key={imgSrc.value} className="flex gap-3 items-center">
@@ -326,7 +326,7 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
     
                             <div className="flex flex-col md:flex-row items-start gap-4">
                                 <label htmlFor='salary' className="w-full md:w-1/4 min-w-24 font-medium mb-2 md:mb-0">Salary</label>
-                                <div className="w-full md:w-3/4">
+                                <div className="w-full md:w-[35%]">
                                     <select
                                         data-testid="salary-dropdown-fields"
                                         name="salary"
@@ -404,7 +404,6 @@ export class EmpRegForm extends Component<EmpRegFromProps, EmpRegFormState> {
                             </div>
                         </div>
     
-                        {/* Rest of the form remains unchanged */}
                         <div className="flex flex-col md:flex-row justify-between items-center mt-4 space-y-4 md:space-y-0">
                             <button
                                 onClick={() => this.props.navigate('/')}
