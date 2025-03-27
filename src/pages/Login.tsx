@@ -3,9 +3,6 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import { toast } from 'react-toastify';
-
-
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
