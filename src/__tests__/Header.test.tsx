@@ -8,7 +8,7 @@ const mockedNavigate = vi.fn()
 describe("Header component tests", () => {
 
     beforeEach(() => {
-        localStorage.setItem('userInfo', 'testUser');
+        localStorage.setItem('userInfo', JSON.stringify({ given_name: "testUser" }));
         localStorage.setItem('credential', 'testCredential');
     });
 
@@ -33,21 +33,28 @@ describe("Header component tests", () => {
         expect(screen.queryByText(/logout/i)).not.toBeInTheDocument()
     })
 
-    test('logs out and navigates to "/" when logout button is clicked', () => {
-       
-        render(<Header navigate={mockedNavigate} />, { wrapper: MemoryRouter });
-
-        expect(localStorage.getItem('userInfo')).toBe('testUser');
-        expect(localStorage.getItem('credential')).toBe('testCredential');
-
-
-        const logoutButton = screen.getByText('Logout');
+    test("logs out and navigates to '/' when logout button is clicked", () => {
+        render(
+          <MemoryRouter>
+            <Header navigate={mockedNavigate} />
+          </MemoryRouter>
+        );
+      
+        
+        expect(localStorage.getItem("userInfo")).toBe(JSON.stringify({ given_name: "testUser" }));
+        expect(localStorage.getItem("credential")).toBe("testCredential");
+      
+        const profileButton = screen.getByRole("button", { name: /testUser/i });
+        fireEvent.click(profileButton);
+        const logoutButton = screen.getByText(/logout/i);
+        expect(logoutButton).toBeInTheDocument(); 
+      
         fireEvent.click(logoutButton);
-
-
-        expect(localStorage.getItem('userInfo')).toBeNull();
-        expect(localStorage.getItem('credential')).toBeNull();
-
-    });
+      
+        expect(localStorage.getItem("userInfo")).toBeNull();
+        expect(localStorage.getItem("credential")).toBeNull();
+      
+      });
+      
 
 })
