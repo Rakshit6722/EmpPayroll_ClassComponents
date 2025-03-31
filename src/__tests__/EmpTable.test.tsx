@@ -98,7 +98,7 @@ describe("EmpTable Component", () => {
             expect(screen.queryByText("John Doe")).not.toBeInTheDocument();
         });
 
-        // Click cross icon to hide search
+
         const crossIcon = screen.getByAltText("cross-icon");
         fireEvent.click(crossIcon);
 
@@ -135,13 +135,13 @@ describe("EmpTable Component", () => {
         const deleteButton = screen.getAllByAltText("delete")[0];
         fireEvent.click(deleteButton);
 
-        // Check if modal appears
+
         await waitFor(() => {
             expect(screen.getByText("Delete Employee")).toBeInTheDocument();
             expect(screen.getByText("Are you sure you want to delete this employee?")).toBeInTheDocument();
         });
 
-        // Confirm deletion
+
         const confirmDeleteButton = screen.getByText("Delete");
         fireEvent.click(confirmDeleteButton);
 
