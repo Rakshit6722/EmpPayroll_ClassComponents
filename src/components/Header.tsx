@@ -19,7 +19,7 @@ class Header extends Component<HeaderProps, HeaderState> {
         super(props)
     
         this.state = {
-            profileName: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo') as string).given_name : '',
+            profileName: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo') as string)?.given_name : "",
             isProfileDropdownOpen: false
         }
     }

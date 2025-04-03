@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>0/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>0/21</span>
             </div>
         
             
@@ -85,11 +85,15 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -103,32 +107,37 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
-<span class="cstat-no" title="statement not covered" >import './App.css'</span>
-<span class="cstat-no" title="statement not covered" >import EmpRegForm from './pages/EmpRegForm'</span>
-<span class="cstat-no" title="statement not covered" >import EmpTable from './pages/EmpTable'</span>
-<span class="cstat-no" title="statement not covered" >import { Route, Routes } from 'react-router-dom'</span>
-<span class="cstat-no" title="statement not covered" >import Login from './pages/Login'</span>
-<span class="cstat-no" title="statement not covered" >import AuthRoute from './components/AuthRoute'</span>
-<span class="cstat-no" title="statement not covered" >import ProtectedRoutes from './components/ProtectedRoutes'</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Suspense, lazy } from 'react';<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" >import './App.css';</span>
+<span class="cstat-no" title="statement not covered" >import { Route, Routes } from 'react-router-dom';</span>
+<span class="cstat-no" title="statement not covered" >import AuthRoute from './components/AuthRoute';</span>
+<span class="cstat-no" title="statement not covered" >import ProtectedRoutes from './components/ProtectedRoutes';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >const Login = lazy(() =&gt; import('./pages/Login'));</span>
+<span class="cstat-no" title="statement not covered" >const EmpRegForm = lazy(() =&gt; import('./pages/EmpRegForm'));</span>
+<span class="cstat-no" title="statement not covered" >const EmpTable = lazy(() =&gt; import('./pages/EmpTable'));</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >const App = () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
 <span class="cstat-no" title="statement not covered" >    &lt;div&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;Routes&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;Route path={"/"} element={&lt;AuthRoute&gt;&lt;Login/&gt;&lt;/AuthRoute&gt;}/&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;Route path={"/empRegister"} element={&lt;ProtectedRoutes&gt;&lt;EmpRegForm/&gt;&lt;/ProtectedRoutes&gt;}/&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;Route path='/empTable' element={&lt;ProtectedRoutes&gt;&lt;EmpTable/&gt;&lt;/ProtectedRoutes&gt;}/&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/Routes&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;Routes&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;Route path="/" element={&lt;AuthRoute&gt;&lt;Login /&gt;&lt;/AuthRoute&gt;} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;Route path="/empRegister" element={&lt;ProtectedRoutes&gt;&lt;EmpRegForm /&gt;&lt;/ProtectedRoutes&gt;} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;Route path="/empTable" element={&lt;ProtectedRoutes&gt;&lt;EmpTable /&gt;&lt;/ProtectedRoutes&gt;} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/Routes&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/Suspense&gt;</span>
 <span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
-  )
-<span class="cstat-no" title="statement not covered" >}</span>
+  );
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default App</span>
+<span class="cstat-no" title="statement not covered" >export default App;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -136,7 +145,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-27T08:33:41.152Z
+                at 2025-03-31T05:07:34.842Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
