@@ -5,7 +5,6 @@ import Header from '../components/Header';
 const GitHubCallback: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const githubClientId = import.meta.env.VITE_GITHUB_CLIENTID;
     const githubClientSecret = import.meta.env.VITE_GITHUB_CLIENTSECRET;
@@ -18,7 +17,6 @@ const GitHubCallback: React.FC = () => {
             console.log("Code", code)
 
             if (!code) {
-                setError('Authorization code not found');
                 setLoading(false);
                 return;
             }
@@ -90,7 +88,6 @@ const GitHubCallback: React.FC = () => {
                 navigate('/empTable');
             } catch (error: any) {
                 console.error('GitHub authentication error:', error);
-                setError(`Failed to authenticate with GitHub: ${error.message}`);
                 setLoading(false);
             }
         };
@@ -119,19 +116,6 @@ const GitHubCallback: React.FC = () => {
                             </div>
                         )}
 
-                        {/* {error && (
-                            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 w-full" role="alert">
-                                <span className="block sm:inline">{error}</span>
-                                <div className="mt-4">
-                                    <button 
-                                        onClick={() => navigate('/')} 
-                                        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
-                                    >
-                                        Back to Login
-                                    </button>
-                                </div>
-                            </div>
-                        )} */}
                     </div>
                 </div>
             </div>
