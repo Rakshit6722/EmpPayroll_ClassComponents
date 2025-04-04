@@ -246,7 +246,7 @@ class EmpTable extends Component<EmpTableProps, EmpTableState> {
                                         ))
                                     ) : (
                                         <tr>
-                                            <td colSpan={6} className="p-4 text-center bg-white">No employees found</td>
+                                            <td colSpan={7 } className="p-4 text-center bg-white">No employees found</td>
                                         </tr>
                                     )}
                                 </tbody>
