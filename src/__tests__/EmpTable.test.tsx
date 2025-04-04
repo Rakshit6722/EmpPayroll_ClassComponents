@@ -110,5 +110,37 @@ describe("EmpTable Component", () => {
         await waitFor(() => {
             expect(screen.getByText("No employees found")).toBeInTheDocument();
         });
+    })
+    
+    test("shows delete confirmation modal and deletes employee on confirmation", async () => {
+
+        vi.mocked(getEmployees).mockResolvedValue({ data: mockEmployees } as AxiosResponse);
+
+        vi.mocked(deleteEmployee).mockResolvedValue({ status: 200 } as AxiosResponse);
+    
+        render(
+            <MemoryRouter>
+                <EmpTable navigate={mockNavigate} />
+            </MemoryRouter>
+        );
+    
+        await waitFor(() => expect(getEmployees).toHaveBeenCalled());
+    
+        const deleteButtons = screen.getAllByLabelText("Delete Employee");
+        fireEvent.click(deleteButtons[0]);
+    
+        expect(screen.getByText("Delete Employee")).toBeInTheDocument();
+        expect(screen.getByText("Are you sure you want to delete this employee?")).toBeInTheDocument();
+    
+        const confirmDeleteButton = screen.getByText("Delete");
+        fireEvent.click(confirmDeleteButton);
+    
+        await waitFor(() => {
+            expect(deleteEmployee).toHaveBeenCalledWith("1"); 
+            expect(getEmployees).toHaveBeenCalledTimes(2); 
+            expect(screen.queryByText("Delete Employee")).not.toBeInTheDocument();
+        });
     });
+    
+    ;
 });
