@@ -57,7 +57,7 @@ describe("Login Component", () => {
         
         fireEvent.click(screen.getByText("Google Login"));
 
-        await waitFor(() => {
+         waitFor(() => {
             expect(screen.getByText("Login Failed. Please try again.")).toBeInTheDocument();
         });
     });
