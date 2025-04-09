@@ -98,6 +98,8 @@ describe("EmpTable Component", () => {
         });
     });
 
+    
+
     test("displays 'No employees found' when no employees match the search", async () => {
         await renderComponent();
 
