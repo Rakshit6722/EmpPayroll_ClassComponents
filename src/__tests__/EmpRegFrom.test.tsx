@@ -10,7 +10,8 @@ import { vi } from "vitest";
 vi.mock("../services/Api");
 vi.mock("react-toastify", () => ({
     toast: {
-        success: vi.fn()
+        success: vi.fn(),
+        error: vi.fn(),
     }
 }));
 
