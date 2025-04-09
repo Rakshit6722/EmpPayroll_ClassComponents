@@ -29,7 +29,7 @@ const Login: React.FC = () => {
 
     const handleGithubLogin = () => {
      
-        const callbackUrl = 'https://emp-payroll-class-components-git-main-rakshit6722s-projects.vercel.app';
+        const callbackUrl = 'http://localhost:5173/github/callback';
         const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${githubClientId}&redirect_uri=${encodeURIComponent(callbackUrl)}&scope=user:email`;
 
         window.location.href = githubAuthUrl;
